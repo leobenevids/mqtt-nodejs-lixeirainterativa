@@ -41,11 +41,11 @@ let garbageLevel = [];
 
 // Ao receber mensagem
 client.on("message", (topic, payload) => {
-  console.log(`Received Message: Topic: ${topic}, Message: ${payload}`);
+  // console.log(`Received Message: Topic: ${topic}, Message: ${payload}`);
 
   garbageLevel = payload.toString();
 
-  console.log(garbageLevel);
+  // console.log(garbageLevel);
 
   return garbageLevel;
 });
@@ -54,6 +54,6 @@ app.get("/", cors(), (req, res) => {
   return res.json({ garbageLevel });
 });
 
-app.listen(3000, function () {
-  console.log('CORS-enabled web server listening on port 3000')
+app.listen(process.env.PORT || 3000, function () {
+  console.log(`Server running on port 3000`, this.address().port, app.settings.env);
 });
